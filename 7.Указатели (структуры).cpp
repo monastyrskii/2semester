@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include<iostream>
 #include <iosfwd> 
 
@@ -27,7 +27,25 @@ void GetTrain(train *Tr, int n)  // Ввод данных о поездах
 		cout << endl;
 	}
 }
-
+void SortTrain(train *Tr, int n)
+{
+	for (int j = 1; j < n; j++)	// Сортировка массива по времени отправления
+		for (int i = 1; i < n; i++)
+		{
+			if (Tr[i].hours > Tr[i + 1].hours)
+			{
+				train g = Tr[i + 1];
+				Tr[i + 1] = Tr[i];
+				Tr[i] = g;
+			}
+			if (Tr[i].hours == Tr[i + 1].hours && Tr[i].minutes > Tr[i + 1].minutes)
+			{
+				train g = Tr[i + 1];
+				Tr[i + 1] = Tr[i];
+				Tr[i] = g;
+			}
+		}
+}
 void ShowTrain(train *Tr, int n) // Вывод данных о поездах
 {
 	for (int i = 1; i <= n; i++)
@@ -62,38 +80,24 @@ void Destination(train *Tr, int n) // Поиск поезда по пункту 
 		}
 	if (c != 32)
 		cout << "No matching trains found" << endl;
-
 }
 
 int main()
 {
-	int i, j, n;
+	int n;
 	cout << "Enter the quantity of trains" << endl;
 	cin >> n;
-	train *Tr = new train[n], g;
+	train *Tr = new train[n];
 
 	GetTrain(Tr, n);
-	for (j = 1; j < n; j++)	// Сортировка массива по времени отправления
-		for (i = 1; i < n; i++)
-		{
-			if (Tr[i].hours > Tr[i + 1].hours)
-			{
-				g = Tr[i + 1];
-				Tr[i + 1] = Tr[i];
-				Tr[i] = g;
-			}
-			if (Tr[i].hours == Tr[i + 1].hours && Tr[i].minutes > Tr[i + 1].minutes)
-			{
-				g = Tr[i + 1];
-				Tr[i + 1] = Tr[i];
-				Tr[i] = g;
-			}
-		}
+	
+	SortTrain(Tr, n);
+
 	cout << endl << "Train schedule:" << endl;
+
 	ShowTrain(Tr, n);
 
 	Destination(Tr, n);
 
-	system("pause");
 	return 0;
 }
