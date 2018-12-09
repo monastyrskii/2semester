@@ -50,7 +50,7 @@ int main()
 					}
 			if (abs(above - below) < min) // Минимальная разность между выше/ниже
 			{
-				min = above - below;
+				min = abs(above - below);
 				mink = k;
 				mini = i;
 			}
