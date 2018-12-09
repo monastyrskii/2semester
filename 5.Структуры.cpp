@@ -67,7 +67,7 @@ void Destination(train Tr[6], int n) // Поиск поезда по пункт�
 int main()
 {
 	const int n = 6;
-	int i, j; train g, m;
+	int i, j; train g;
 	train Tr[6];
 
 	GetTrain(Tr, n);
