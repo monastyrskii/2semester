@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include<iostream>
 #include <iosfwd> 
 using namespace std;
@@ -11,9 +11,9 @@ struct train
 	int minutes;
 };
 
-void GetTrain(train Tr[6], int n) // Ввод данных о поездах
+void GetTrain(train Tr[6], const int n = 6) // Ввод данных о поездах
 {
-	for (int i = 1; i <= n; i++)  
+	for (int i = 1; i <= n; i++)
 	{
 		cout << "Enter the destination of [" << i << "] train: ";
 		cin >> Tr[i].destination;
@@ -27,9 +27,9 @@ void GetTrain(train Tr[6], int n) // Ввод данных о поездах
 	}
 }
 
-void ShowTrain(train Tr[6], int n)  // Вывод данных о поездах
+void ShowTrain(train Tr[6], const int n = 6)  // Вывод данных о поездах
 {
-	for (int i = 1; i <= n; i++)  
+	for (int i = 1; i <= n; i++)
 	{
 		cout << "The destination of [" << i << "] train: " << Tr[i].destination << endl;
 		cout << "The train numder of [" << i << "] train: " << Tr[i].number << endl;
@@ -41,7 +41,26 @@ void ShowTrain(train Tr[6], int n)  // Вывод данных о поездах
 	}
 }
 
-void Destination(train Tr[6], int n) // Поиск поезда по пункту назначения
+void SortTrain(train Tr[6], const int n = 6) {
+	for (int j = 1; j < n; j++)	// Сортировка массива по времени отправления
+		for (int i = 1; i < n; i++)
+		{
+			if (Tr[i].hours > Tr[i + 1].hours)
+			{
+				train g = Tr[i + 1];
+				Tr[i + 1] = Tr[i];
+				Tr[i] = g;
+			}
+			if (Tr[i].hours == Tr[i + 1].hours && Tr[i].minutes > Tr[i + 1].minutes)
+			{
+				train g = Tr[i + 1];
+				Tr[i + 1] = Tr[i];
+				Tr[i] = g;
+			}
+		}
+}
+
+void Destination(train Tr[6], const int n = 6) // Поиск поезда по пункту назначения
 {
 	char dest1[256]; int c = 1;
 	cout << "Enter the destination: " << endl;
@@ -67,27 +86,13 @@ void Destination(train Tr[6], int n) // Поиск поезда по пункт�
 int main()
 {
 	const int n = 6;
-	int i, j; train g;
 	train Tr[6];
 
 	GetTrain(Tr, n);
 
-	for (j = 1; j < n; j++)	// Сортировка массива по времени отправления
-		for (i = 1; i < n; i++)
-		{
-			if (Tr[i].hours > Tr[i + 1].hours)
-			{
-				g = Tr[i + 1];
-				Tr[i + 1] = Tr[i];
-				Tr[i] = g;
-			}
-			if (Tr[i].hours == Tr[i + 1].hours && Tr[i].minutes > Tr[i + 1].minutes)
-			{
-				g = Tr[i + 1];
-				Tr[i + 1] = Tr[i];
-				Tr[i] = g;
-			}
-		}
+	SortTrain(Tr, n);
+
+	cout << endl << "Train schedule:" << endl;
 
 	ShowTrain(Tr, n);
 
