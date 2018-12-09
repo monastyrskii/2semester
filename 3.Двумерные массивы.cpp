@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-	const int n = 7, m = 10
+	const int n = 7, m = 10;
 	int i, j, g, k = 0, A[n][m], int ch[m];
 
 	/*for (j = 0; j < m; j++) // ввод матрицы вручную
