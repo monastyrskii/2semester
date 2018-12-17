@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include <iostream>
 using namespace std;
 
@@ -28,7 +28,7 @@ int main()
 		cout << endl;
 	}
 
-	int *ch = new int[j]; // поиск характеристик столбцов
+	int *ch = new int[m]; // поиск характеристик столбцов //
 	for (j = 0; j < m; j++)
 	{
 		ch[j] = 0;
@@ -38,9 +38,7 @@ int main()
 		}
 	}
 
-	while (k <= m + 1) //перестановка матрицы
-	{
-		k += 1;
+	for (k = 0; k < m; k++) //перестановка матрицы
 		for (j = 0; j < m - 1; j++)
 			if (ch[j] > ch[j + 1])
 			{
@@ -53,7 +51,6 @@ int main()
 					A[i][j] = g;
 				}
 			}
-	}
 	cout << endl << "Changet matrix" << endl;
 	for (i = 0; i < n; i++) //вывод измененной матрицы
 	{
